@@ -7,17 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TreeView>
-            <TreeViewItem Header="Уровень 1-1" >
-                <TreeViewItem Header="Уровень 2-1"/>
-                <TreeViewItem Header="Уровень 2-2"/>
-                <TreeViewItem Header="Уровень 2-3">
-                    <TreeViewItem Header="Уровень 3-1"/>
-                    <TreeViewItem Header="Уровень 3-2"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Уровень 2-4"/>
-            </TreeViewItem>
-            <TreeViewItem Header="Уровень 1-2"/>
-        </TreeView>
+        <Grid.Resources>
+            <HierarchicalDataTemplate x:Key="template_ListTreeViewItem" 
+                                  ItemsSource="{Binding ListTreeViewItem}"
+                                  DataType="{x:Type local:TreeViewModel}" >
+                <TreeViewItem Header="{Binding Path=FullName}" />
+            </HierarchicalDataTemplate>
+        </Grid.Resources>
+        <TreeView ItemsSource="{Binding Path=Root_ListTreeViewItem}" 
+              ItemTemplate="{StaticResource template_ListTreeViewItem}" />
     </Grid>
 </Window>
